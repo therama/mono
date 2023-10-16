@@ -31,4 +31,4 @@ jobs:
       - name: Check git status
         run: |
           git status
-      - run: The version is ${{ inputs.version }}
+      - run: echo "The version is ${{ inputs.version }}."
