@@ -39,4 +39,6 @@ jobs:
           git commit -m "update version.json"
           git push
       - name: Print cocoapods session
+        env:
+          COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
         run: pod trunk me
