@@ -1,6 +1,12 @@
 name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [workflow_dispatch]
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to tag'
+        required: true
+        type: string
 jobs:
   Explore-GitHub-Actions:
     runs-on: macos-latest
@@ -25,3 +31,4 @@ jobs:
       - name: Check git status
         run: |
           git status
+      - run: The version is ${{ inputs.version }}
