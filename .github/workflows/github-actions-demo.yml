@@ -38,6 +38,10 @@ jobs:
           git add version.json
           git commit -m "update version.json"
           git push
+      - name: Add and push new git tag
+        run: |
+          git tag ${{ inputs.version }}
+          git push origin ${{ inputs.version }}
       - name: Print cocoapods session
         env:
           COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
