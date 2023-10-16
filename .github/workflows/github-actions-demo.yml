@@ -22,12 +22,12 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
-      - name: Make a file and commit
-        run: |
-          touch test-file
-          git add test-file
-          git commit -m "adding test file"
-          git push
+      # - name: Make a file and commit
+      #   run: |
+      #     touch test-file
+      #     git add test-file
+      #     git commit -m "adding test file"
+      #     git push
       - name: Check git status
         run: |
           git status
