@@ -35,7 +35,7 @@ jobs:
         env:
           COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
         run: |
-          if [ ${{ inputs.dryRun }} ]; then
+          if [ ${{ inputs.dryRun }} == true ]; then
             echo "This is a dry run, <insert pod spec lint call here>"
           else
             echo "This is a regular run, <insert pod trunk push call here>"
