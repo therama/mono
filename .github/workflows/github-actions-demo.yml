@@ -7,24 +7,17 @@ on:
         description: 'Version to tag'
         required: true
         type: string
+      dryRun:
+        description: 'Dry run to only validate without release.'
+        required: false
+        default: true
+        type: boolean
 jobs:
   Explore-GitHub-Actions:
     runs-on: macos-latest
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
       - name: Check out repository code
         uses: actions/checkout@v4
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
-      - name: Check git status
-        run: |
-          git status
       - run: echo "The version argument is ${{ inputs.version }}."
       - name: Update the version.json file
         run: |
@@ -41,4 +34,10 @@ jobs:
       - name: Print cocoapods session
         env:
           COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
-        run: pod trunk me
+        run: |
+          if [ ${{ inputs.dryRun }} ]; then
+            echo "This is a dry run, <insert pod spec lint call here>"
+          else
+            echo "This is a regular run, <insert pod trunk push call here>"
+          fi
+          pod trunk me
