@@ -1,5 +1,5 @@
 name: GitHub Actions Demo
-run-name: Bumping version to ${{ inputs.version }} and releasing 🚀
+run-name: Bumping version to ${{ inputs.version }} and ${{ inputs.dryRun && "validating" || "releasing" }} 🚀
 on:
   workflow_dispatch:
     inputs:
