@@ -1,5 +1,5 @@
 name: GitHub Actions Demo
-run-name: Bumping version to ${{ inputs.version }} and releasing (dry run = $${{ inputs.dryRun }}) 🚀
+run-name: Bumping version to ${{ inputs.version }} and releasing (dry run = ${{ inputs.dryRun }}) 🚀
 on:
   workflow_dispatch:
     inputs:
@@ -18,7 +18,7 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
-      - run: echo "Github ref is -> ${github.ref}"
+      - run: echo "Github ref is -> ${{ github.ref }}"
       - run: echo "The version argument is ${{ inputs.version }}."
       - name: Update the version.json file
         run: |
