@@ -51,12 +51,11 @@ jobs:
           echo $command
           # make the list of connectors
           connectors=()
-          if ['${{ inputs.connectors }}' == 'All']
+          if ['${{ inputs.connectors }}' = 'All']
           then
             echo "nope"
           else
             echo "yep"
-            connectors+=('Test1')
             connectors+=('THEOplayer-Connector-${{ inputs.connectors }}')
             connectors+=('Test2')
           fi
