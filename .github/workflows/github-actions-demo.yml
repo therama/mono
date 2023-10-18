@@ -52,10 +52,9 @@ jobs:
           # make the list of connectors
           connectors=()
           if [ "${{ inputs.connectors }}" == "All" ]; then
-            echo "nope"
+            files=(*)
+            echo $files
           else
-            echo "yep"
             connectors+=('THEOplayer-Connector-${{ inputs.connectors }}')
-            connectors+=('Test2')
           fi
           echo $connectors
