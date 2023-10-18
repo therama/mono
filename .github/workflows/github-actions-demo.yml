@@ -55,11 +55,11 @@ jobs:
             files=(*)
             for file in ${files[*]}
             do
-              if [[ $file == *.podspec ]]; then
-                echo "1"
+              if [[ $file == *.rb ]]; then
+                connectors+=('THEOplayer-Connector-${file}')
               fi
             done
           else
             connectors+=('THEOplayer-Connector-${{ inputs.connectors }}')
           fi
-          echo $connectors
+          echo ${connectors[@]}
