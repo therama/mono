@@ -12,6 +12,14 @@ on:
         required: false
         default: true
         type: boolean
+      items:
+        description: 'Pick something'
+        type: choice
+        options:
+          - John
+          - Smith
+          - Mike
+          - Scott
 jobs:
   Explore-GitHub-Actions:
     runs-on: macos-latest
