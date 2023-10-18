@@ -30,9 +30,9 @@ jobs:
         uses: actions/checkout@v4
       - run: echo "Github ref is -> ${{ github.ref }}"
       - run: echo "The version argument is ${{ inputs.version }}."
-      # - name: Update the version.json file
-      #   run: |
-      #     sh update_version_json.sh -v ${{ inputs.version }}
+      - name: Update the version.json file
+        if: ${{ inputs.version != '' }}
+        run: sh update_version_json.sh -v ${{ inputs.version }}
       # - name: Commit and push the changes made to the version.json file
       #   run: |
       #     git add version.json
