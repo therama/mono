@@ -58,7 +58,6 @@ jobs:
               if [[ $file == *.rb ]]; then
                 ${{ format('Hello {0} {1} {2}', 'Mona', 'the', 'Octocat') }}
                 ${{ format('THEOplayer-Connector-{0}', 'a') }}
-                ${{ format('THEOplayer-Connector-{0}', file) }}
                 ${{ format('THEOplayer-Connector-{0}', $file) }}
                 f=${{ format('THEOplayer-Connector-{0}', file) }}
                 echo $f
