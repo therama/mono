@@ -55,8 +55,7 @@ jobs:
             files=(*)
             for file in ${files[*]}
             do
-              echo $file
-              if [[ $file == *sion.rb ]]; then
+              if [[ $file == *.podspec ]]; then
                 echo "1"
               fi
             done
