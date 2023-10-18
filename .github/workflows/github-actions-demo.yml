@@ -52,8 +52,10 @@ jobs:
           # make the list of connectors
           connectors=()
           if [inputs.connectors == 'All'] then
-          echo "nope"
+            echo "nope"
           else
-          connectors+=('THEOplayer-Connector-${inputs.connectors}')
+            echo "yep"
+            connectors+=('Ttest')
+            connectors+=('THEOplayer-Connector-${inputs.connectors}')
           fi
           echo $connectors
