@@ -13,7 +13,7 @@ on:
         default: true
         type: boolean
       connectors:
-        description: 'Choose the Connectors'
+        description: 'Choose the Connector(s)'
         required: true
         type: choice
         default: 'All'
@@ -51,12 +51,12 @@ jobs:
           echo $command
           # make the list of connectors
           connectors=()
-          if [inputs.connectors == 'All']
+          if [${{ inputs.connectors }} == 'All']
           then
             echo "nope"
           else
             echo "yep"
             connectors+=('Ttest')
-            connectors+=('THEOplayer-Connector-${inputs.connectors}')
+            connectors+=('THEOplayer-Connector-$${ inputs.connectors }}')
           fi
           echo $connectors
