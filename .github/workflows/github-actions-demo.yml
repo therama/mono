@@ -28,27 +28,23 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
-      - run: echo "Github ref is -> ${{ github.ref }}"
-      - run: echo "The version argument is ${{ inputs.version }}."
       - name: Update the version.json file
         if: inputs.version != ''
         run: sh update_version_json.sh -v ${{ inputs.version }}
-      # - name: Commit and push the changes made to the version.json file
-      #   run: |
-      #     git add version.json
-      #     git commit -m "update version.json"
-      #     git push
-      # - name: Add and push new git tag
-      #   run: |
-      #     git tag ${{ inputs.version }}
-      #     git push origin ${{ inputs.version }}
-      # - name: Print cocoapods session
-      #   env:
-      #     COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
-      #   run: |
-      #     if [ ${{ inputs.dryRun }} == true ]; then
-      #       echo "This is a dry run, <insert pod spec lint call here>"
-      #     else
-      #       echo "This is a regular run, <insert pod trunk push call here>"
-      #     fi
-      #     pod trunk me
+      - name: Commit and push the changes made to the version.json file
+        if: inputs.version != ''
+        run: |
+          git add version.json
+          git commit -m "update version.json"
+          git push
+      - name: Add and push new git tag
+        if: inputs.version != ''
+        run: |
+          git tag ${{ inputs.version }}
+          git push origin ${{ inputs.version }}
+      - name: ${{ (inputs.dryRun == true && 'Validate') || 'Release' }} on Cocoapods
+        env:
+          COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
+        run: |
+          command = $${{ (inputs.dryRun == true && 'spec lint') || 'trunk push' }}
+          echo command
