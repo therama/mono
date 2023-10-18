@@ -56,7 +56,9 @@ jobs:
             for file in ${files[*]}
             do
               if [[ $file == *.rb ]]; then
-                connectors+=(format('THEOplayer-Connector-{0}', $file))
+                f=format('THEOplayer-Connector-{0}', $file)
+                echo $f
+                connectors+=(f)
               fi
             done
           else
