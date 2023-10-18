@@ -1,5 +1,5 @@
 name: GitHub Actions Demo
-run-name: ${{ (inputs.version == '' && 'Not bumping version') || format('Bumping version to {0}', inputs.version) }} and ${{ (inputs.dryRun == true && 'validating') || 'releasing' }} ${{ inputs.items }} 🚀
+run-name: ${{ (inputs.version == '' && 'Not bumping version') || format('Bumping version to {0}', inputs.version) }} and ${{ (inputs.dryRun == true && 'validating') || 'releasing' }} ${{ inputs.connectors }} 🚀
 on:
   workflow_dispatch:
     inputs:
@@ -12,8 +12,8 @@ on:
         required: true
         default: true
         type: boolean
-      items:
-        description: 'Pick something'
+      connectors:
+        description: 'Choose the Connectors'
         required: true
         type: choice
         default: 'All'
@@ -46,5 +46,14 @@ jobs:
         env:
           COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
         run: |
+          # make the command
           command="${{ (inputs.dryRun == true && 'spec lint') || 'trunk push' }}"
           echo $command
+          # make the list of connectors
+          connectors=()
+          if [inputs.connectors == 'All'] then
+          echo "nope"
+          else
+          connectors+=('THEOplayer-Connector-${inputs.connectors}')
+          fi
+          echo $connectors
