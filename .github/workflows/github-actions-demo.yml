@@ -1,22 +1,24 @@
 name: GitHub Actions Demo
-run-name: Bumping version to ${{ inputs.version }} and releasing (dry run = ${{ inputs.dryRun }}) 🚀
+run-name: ${{ (inputs.version == '' && 'Not bumping version') || format('Bumping version to {0}', inputs.version) }} and ${{ (inputs.dryRun == true && 'validating') || 'releasing' }} ${{ inputs.items }} 🚀
 on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Version to tag'
-        required: true
+        description: 'Version to bump and tag. If unset, then skips version bump and tag.'
+        required: false
         type: string
       dryRun:
         description: 'Dry run to only validate without release.'
-        required: false
+        required: true
         default: true
         type: boolean
       items:
         description: 'Pick something'
+        required: true
         type: choice
+        default: 'All'
         options:
-          - John
+          - All
           - Smith
           - Mike
           - Scott
@@ -28,25 +30,25 @@ jobs:
         uses: actions/checkout@v4
       - run: echo "Github ref is -> ${{ github.ref }}"
       - run: echo "The version argument is ${{ inputs.version }}."
-      - name: Update the version.json file
-        run: |
-          sh update_version_json.sh -v ${{ inputs.version }}
-      - name: Commit and push the changes made to the version.json file
-        run: |
-          git add version.json
-          git commit -m "update version.json"
-          git push
-      - name: Add and push new git tag
-        run: |
-          git tag ${{ inputs.version }}
-          git push origin ${{ inputs.version }}
-      - name: Print cocoapods session
-        env:
-          COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
-        run: |
-          if [ ${{ inputs.dryRun }} == true ]; then
-            echo "This is a dry run, <insert pod spec lint call here>"
-          else
-            echo "This is a regular run, <insert pod trunk push call here>"
-          fi
-          pod trunk me
+      # - name: Update the version.json file
+      #   run: |
+      #     sh update_version_json.sh -v ${{ inputs.version }}
+      # - name: Commit and push the changes made to the version.json file
+      #   run: |
+      #     git add version.json
+      #     git commit -m "update version.json"
+      #     git push
+      # - name: Add and push new git tag
+      #   run: |
+      #     git tag ${{ inputs.version }}
+      #     git push origin ${{ inputs.version }}
+      # - name: Print cocoapods session
+      #   env:
+      #     COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
+      #   run: |
+      #     if [ ${{ inputs.dryRun }} == true ]; then
+      #       echo "This is a dry run, <insert pod spec lint call here>"
+      #     else
+      #       echo "This is a regular run, <insert pod trunk push call here>"
+      #     fi
+      #     pod trunk me
