@@ -55,8 +55,7 @@ jobs:
             files=(*)
             for file in ${files[*]}
             do
-              echo $file
-              if [ $file == *rb ]; then
+              if [ "$file" == *rb ]; then
                 echo $file
               fi
             done
