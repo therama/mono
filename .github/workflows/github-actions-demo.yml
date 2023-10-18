@@ -53,7 +53,7 @@ jobs:
           connectors=()
           if [ "${{ inputs.connectors }}" == "All" ]; then
             files=(*)
-            echo $files
+            echo ${files[@]}
           else
             connectors+=('THEOplayer-Connector-${{ inputs.connectors }}')
           fi
