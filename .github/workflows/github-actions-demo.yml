@@ -50,18 +50,17 @@ jobs:
           command="${{ (inputs.dryRun == true && 'spec lint') || 'trunk push' }}"
           echo $command
           # make the list of connectors
+          prefix="THEOplayer-Connector"
           connectors=()
           if [ "${{ inputs.connectors }}" == "All" ]; then
             files=(*)
             for file in ${files[*]}
             do
               if [[ $file == *.rb ]]; then
-                f="THEOplayer-Connector-$file"
-                echo $f
-                connectors+=($f)
+                connectors+=("$prefix-$file")
               fi
             done
           else
-            connectors+=('THEOplayer-Connector-${{ inputs.connectors }}')
+            connectors+=("$prefix-${{ inputs.connectors }}")
           fi
           echo ${connectors[@]}
