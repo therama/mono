@@ -51,7 +51,8 @@ jobs:
           echo $command
           # make the list of connectors
           connectors=()
-          if [inputs.connectors == 'All'] then
+          if [inputs.connectors == 'All']
+          then
             echo "nope"
           else
             echo "yep"
