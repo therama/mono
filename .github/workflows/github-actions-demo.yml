@@ -56,7 +56,7 @@ jobs:
             for file in ${files[*]}
             do
               if [[ $file == *.rb ]]; then
-                connectors+=('THEOplayer-Connector-${file}')
+                connectors+=('THEOplayer-Connector-${{ file }}')
               fi
             done
           else
