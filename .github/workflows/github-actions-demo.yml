@@ -64,5 +64,5 @@ jobs:
           fi
           for connector in ${connectors[*]}
           do
-            pod $command ${{ connector }} --verbose
+            pod $command $connector --verbose
           done
