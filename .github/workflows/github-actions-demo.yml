@@ -56,7 +56,7 @@ jobs:
             for file in ${files[*]}
             do
               if [[ $file == *.podspec ]]; then
-                connectors+=("$prefix-$file")
+                connectors+=("$file")
               fi
             done
           else
