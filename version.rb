@@ -15,3 +15,7 @@ end
 def version
   return major_minor_version + '.' + patch_version
 end
+
+def print_version
+  puts version
+end
