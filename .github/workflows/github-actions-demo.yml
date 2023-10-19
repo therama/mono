@@ -84,9 +84,13 @@ jobs:
       - name: Update(Revert) the version.json file back to the previous version
         env:
           PREVIOUS_VERSION: ${{ needs.Explore-GitHub-Actions.outputs.previousVersion }}
-        run: sh update_version_json.sh -v $PREVIOUS_VERSION
+        run: |
+          v1=$(ruby -r "./version.rb" -e "print_version")
+          echo $v1
+          sh update_version_json.sh -v $PREVIOUS_VERSION
+          v2=$(ruby -r "./version.rb" -e "print_version")
+          echo $v2
       - name: Commit and push the changes made to the version.json file
-        if: inputs.version != ''
         run: |
           git add version.json
           git commit -m "update version.json"
