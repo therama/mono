@@ -66,3 +66,8 @@ jobs:
           do
             pod $command $connector --verbose
           done
+      - name: Remove and unpublish git tag (runs only when dryRun == true)
+        if: inputs.dryRun == true
+        run: |
+          git tag --delete ${{ inputs.version }}
+          git push --delete origin refs/tags/${{ inputs.version }}
