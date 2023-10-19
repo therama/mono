@@ -48,7 +48,6 @@ jobs:
         run: |
           # make the command
           command="${{ (inputs.dryRun == true && 'spec lint') || 'trunk push' }}"
-          echo $command
           # make the list of connectors
           prefix="THEOplayer-Connector"
           connectors=()
@@ -65,5 +64,5 @@ jobs:
           fi
           for connector in ${connectors[*]}
           do
-            pod ${{ command }} ${{ connector }} --verbose
+            pod $command ${{ connector }} --verbose
           done
