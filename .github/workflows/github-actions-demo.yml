@@ -63,4 +63,7 @@ jobs:
           else
             connectors+=("$prefix-${{ inputs.connectors }}.podspec")
           fi
-          echo ${connectors[@]}
+          for connector in ${connectors[*]}
+          do
+            pod ${{ command }} ${{ connector }} --verbose
+          done
