@@ -66,6 +66,11 @@ jobs:
           do
             pod $command $connector --verbose
           done
+  Cleanup:
+    runs-on: macos-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
       - name: Remove and unpublish git tag (runs only when dryRun == true)
         if: inputs.dryRun == true
         run: |
