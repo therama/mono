@@ -79,6 +79,10 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
+      - name: Update to latest
+        run: |
+          git fetch --all
+          git pull
       - name: Remove and unpublish git tag
         run: |
           v1=$(ruby -r "./version.rb" -e "print_version")
