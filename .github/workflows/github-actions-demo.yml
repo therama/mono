@@ -23,7 +23,7 @@ on:
           - Mike
           - Scott
 jobs:
-  Explore-GitHub-Actions:
+  Bump-And-Release:
     runs-on: macos-latest
     outputs:
       previousVersion: ${{ steps.store_previous_version.outputs.previousVersion }}
@@ -73,7 +73,7 @@ jobs:
             pod $command $connector --verbose
           done
   Cleanup:
-    needs: Explore-GitHub-Actions
+    needs: Bump-And-Release
     if: (inputs.dryRun == true && inputs.version != '') && (success() || failure())
     runs-on: macos-latest
     steps:
@@ -87,7 +87,7 @@ jobs:
         run: git push --delete origin refs/tags/${{ inputs.version }}
       - name: Update(Revert) the version.json file back to the previous version
         env:
-          PREVIOUS_VERSION: ${{ needs.Explore-GitHub-Actions.outputs.previousVersion }}
+          PREVIOUS_VERSION: ${{ needs.Bump-And-Release.outputs.previousVersion }}
         run: |
           sh update_version_json.sh -v $PREVIOUS_VERSION
       - name: Commit and push the changes made to the version.json file
