@@ -37,7 +37,7 @@ jobs:
           echo "${{ secrets.GITHUB_TOKEN }}"
           echo "${{ github.token }}"
           git config --list
-          git config --global user.name "therama"
+          git config --global user.name "theramazz"
           git config --global user.email "raffi.manissalian@theoplayer.com"
           git config --list
       # - id: store_previous_version
