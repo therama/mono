@@ -40,6 +40,7 @@ jobs:
           git config --global user.name "theramazz"
           git config --global user.email "raffi.manissalian@theoplayer.com"
           git config --list
+          echo "${{ github.actor }}"
           echo "https://${{ github.actor}}:${{ github.token }}@github.com/${{ github.repository }}.git"
       # - id: store_previous_version
       #   run: |
