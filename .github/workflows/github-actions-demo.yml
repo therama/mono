@@ -22,6 +22,7 @@ on:
           - Smith
           - Mike
           - Scott
+permissions: write-all
 jobs:
   Bump-And-Release:
     runs-on: macos-latest
