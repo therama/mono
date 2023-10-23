@@ -40,6 +40,7 @@ jobs:
           git config --global user.name "theramazz"
           git config --global user.email "raffi.manissalian@theoplayer.com"
           git config --list
+          echo "https://${{ github.actor}}:${{ github.token }}@github.com/${{ github.repository }}.git"
       # - id: store_previous_version
       #   run: |
       #     previousVersion=$(ruby -r "./version.rb" -e "print_version")
