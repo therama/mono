@@ -36,6 +36,7 @@ jobs:
         run: |
           echo "${{ secrets.GITHUB_TOKEN }}"
           echo "${{ github.token }}"
+          git config --list
       # - id: store_previous_version
       #   run: |
       #     previousVersion=$(ruby -r "./version.rb" -e "print_version")
