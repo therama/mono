@@ -45,7 +45,7 @@ jobs:
           echo "https://${{ github.actor}}:${{ github.token }}@github.com/${{ github.repository }}.git"
       - name: Debug
         run: |
-          if [[ $inputs.dryRun ]]; then
+          if [[ ${{ inputs.dryRun }} == true ]]; then
             echo "yes"
           fi
       # - id: store_previous_version
