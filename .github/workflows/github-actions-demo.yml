@@ -50,7 +50,7 @@ jobs:
           fi
           extraFlags=""
           extraFlags+="--help"
-          pod spec ${{ extraFlags }}
+          pod spec ${{ $extraFlags }}
       # - id: store_previous_version
       #   run: |
       #     previousVersion=$(ruby -r "./version.rb" -e "print_version")
