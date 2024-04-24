@@ -35,11 +35,7 @@ jobs:
           token: ${{ github.token }}
       - name: Print stuff
         run: |
-          echo runner
-          echo $runner
-          echo "$runner"
           echo "${{ toJson(runner) }}"
-          echo ${{ toJson(runner) }}
           echo "${{ secrets.GITHUB_TOKEN }}"
           echo "${{ github.token }}"
           # git config --list
