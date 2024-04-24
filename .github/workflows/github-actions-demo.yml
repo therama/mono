@@ -35,6 +35,8 @@ jobs:
           token: ${{ github.token }}
       - name: Print stuff
         run: |
+          sw_vers
+          xcodebuild -version
           echo "${{ toJson(runner) }}"
           echo "${{ secrets.GITHUB_TOKEN }}"
           echo "${{ github.token }}"
