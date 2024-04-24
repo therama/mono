@@ -38,8 +38,8 @@ jobs:
           echo runner
           echo $runner
           echo "$runner"
-          echo "${{ runner }}"
-          echo ${{ runner }}
+          echo "${{ toJson(runner) }}"
+          echo ${{ toJson(runner) }}
           echo "${{ secrets.GITHUB_TOKEN }}"
           echo "${{ github.token }}"
           # git config --list
