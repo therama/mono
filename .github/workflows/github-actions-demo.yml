@@ -47,15 +47,6 @@ jobs:
           # git config --list
           echo "${{ github.actor }}"
           echo "https://${{ github.actor}}:${{ github.token }}@github.com/${{ github.repository }}.git"
-      - name: Debug
-        run: |
-          if [[ ${{ inputs.dryRun }} == true ]]; then
-            echo "yes"
-          fi
-          extraFlags=""
-          extraFlags+="--verbose"
-          extraFlags+=" --nope"
-          pod spec $extraFlags
       - id: store_previous_version
         run: |
           previousVersion=$(ruby -r "./version.rb" -e "print_version")
