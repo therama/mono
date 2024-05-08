@@ -56,19 +56,19 @@ jobs:
           extraFlags+="--verbose"
           extraFlags+=" --nope"
           pod spec $extraFlags
-      # - id: store_previous_version
-      #   run: |
-      #     previousVersion=$(ruby -r "./version.rb" -e "print_version")
-      #     echo "previousVersion=$previousVersion" >> "$GITHUB_OUTPUT"
-      # - name: Update the version.json file
-      #   if: inputs.version != ''
-      #   run: sh update_version_json.sh -v ${{ inputs.version }}
-      # - name: Commit and push the changes made to the version.json file
-      #   if: inputs.version != ''
-      #   run: |
-      #     git add version.json
-      #     git commit -m "update version.json"
-      #     git push
+      - id: store_previous_version
+        run: |
+          previousVersion=$(ruby -r "./version.rb" -e "print_version")
+          echo "previousVersion=$previousVersion" >> "$GITHUB_OUTPUT"
+      - name: Update the version.json file
+        if: inputs.version != ''
+        run: sh update_version_json.sh -v ${{ inputs.version }}
+      - name: Commit and push the changes made to the version.json file
+        if: inputs.version != ''
+        run: |
+          git add version.json
+          git commit -m "update version.json"
+          git push
       # - name: Add and push new git tag
       #   if: inputs.version != ''
       #   run: |
