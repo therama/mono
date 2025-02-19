@@ -55,28 +55,28 @@ jobs:
           # git config --list
           echo "${{ github.actor }}"
           echo "https://${{ github.actor}}:${{ github.token }}@github.com/${{ github.repository }}.git"
-      - id: store_previous_version
-        run: |
-          previousVersion=$(ruby -r "./version.rb" -e "print_version")
-          echo "previousVersion=$previousVersion" >> "$GITHUB_OUTPUT"
-      - name: Update the version.json file
-        if: inputs.version != ''
-        run: sh update_version_json.sh -v ${{ inputs.version }}
-      - name: Commit and push the changes made to the version.json file
-        if: inputs.version != ''
-        run: |
-          git add version.json
-          git commit -m "update version.json"
-          git push
-      - name: Update CHANGELOG.md file
-        if: inputs.version != '' && inputs.dryRun == false
-        run: sh update_changelog.sh -v ${{ inputs.version }}
-      - name: Commit and push the changes made to the CHANGELOG.md file
-        if: inputs.version != '' && inputs.dryRun == false
-        run: |
-          git add CHANGELOG.md
-          git commit -m "update CHANGELOG.md"
-          git push
+      # - id: store_previous_version
+      #   run: |
+      #     previousVersion=$(ruby -r "./version.rb" -e "print_version")
+      #     echo "previousVersion=$previousVersion" >> "$GITHUB_OUTPUT"
+      # - name: Update the version.json file
+      #   if: inputs.version != ''
+      #   run: sh update_version_json.sh -v ${{ inputs.version }}
+      # - name: Commit and push the changes made to the version.json file
+      #   if: inputs.version != ''
+      #   run: |
+      #     git add version.json
+      #     git commit -m "update version.json"
+      #     git push
+      # - name: Update CHANGELOG.md file
+      #   if: inputs.version != '' && inputs.dryRun == false
+      #   run: sh update_changelog.sh -v ${{ inputs.version }}
+      # - name: Commit and push the changes made to the CHANGELOG.md file
+      #   if: inputs.version != '' && inputs.dryRun == false
+      #   run: |
+      #     git add CHANGELOG.md
+      #     git commit -m "update CHANGELOG.md"
+      #     git push
       # - name: Add and push new git tag
       #   if: inputs.version != ''
       #   run: |
