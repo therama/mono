@@ -38,6 +38,11 @@ jobs:
           CMD="git config -l"
           if [ ${{ inputs.dryRun }} == false ]; then
             CMD="$CMD --name-only"
+          else
+            podspec="THEOplayer-Connector-Jack.podspec"
+            branch=$(git rev-parse --abbrev-ref HEAD)
+            sed -i "s|:tag => \"[^\"]*\"|:branch => \"$BRANCH_NAME\"|g" "$PODSPEC_FILE"
+            cat "$PODSPEC_FILE"
           fi
           echo "Running command: $CMD"
           $CMD
