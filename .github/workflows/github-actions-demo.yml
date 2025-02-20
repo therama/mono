@@ -25,7 +25,7 @@ on:
 permissions: write-all
 jobs:
   Bump-And-Release:
-    runs-on: macos-latest
+    runs-on: macos-14
     outputs:
       previousVersion: ${{ steps.store_previous_version.outputs.previousVersion }}
     steps:
@@ -41,7 +41,6 @@ jobs:
             CMD="$CMD --name-only"
           else
             branch=$(git rev-parse --abbrev-ref HEAD)
-            ls
             sed -i '' "s|:tag => \"[^\"]*\"|:branch => \"$branch\"|g" "$podspec"
             cat "$podspec"
           fi
