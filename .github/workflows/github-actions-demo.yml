@@ -41,8 +41,8 @@ jobs:
           else
             podspec="THEOplayer-Connector-Jack.podspec"
             branch=$(git rev-parse --abbrev-ref HEAD)
-            sed -i "s|:tag => \"[^\"]*\"|:branch => \"$BRANCH_NAME\"|g" "$PODSPEC_FILE"
-            cat "$PODSPEC_FILE"
+            sed -i "s|:tag => \"[^\"]*\"|:branch => \"$branch\"|g" "$podspec"
+            cat "$branch"
           fi
           echo "Running command: $CMD"
           $CMD
