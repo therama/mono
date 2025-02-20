@@ -43,7 +43,7 @@ jobs:
             branch=$(git rev-parse --abbrev-ref HEAD)
             ls
             sed -i '' "s|:tag => \"[^\"]*\"|:branch => \"$branch\"|g" "$podspec"
-            cat "$branch"
+            cat "$podspec"
           fi
           echo "Running command: $CMD"
           $CMD
