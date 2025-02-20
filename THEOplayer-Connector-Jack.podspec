@@ -1,16 +1,22 @@
+require_relative './file'
+
 Pod::Spec.new do |s|
-  s.name             = 'jack'
-  s.module_name      = 'jacky'
-  s.version          = '1.0.0'
+  s.name             = 'name'
+  s.module_name      = 'module_name'
+  s.version          = version
   s.summary          = 'summary'
 
-  s.description      = 'a description'
+  s.description      = 'description'
 
+  s.homepage         = 'homepage'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = "a nice author"
-  s.source           = { :git => 'url_to_git_repo', :tag => "1.0.0" }
+  s.author           = "author"
+  s.source           = { :git => 'https://github.com/org/repo.git', :tag => s.version.to_s }
 
-  s.platforms    = { :ios => "15.0"}
+  s.platforms    = { :ios => "13.0", :tvos => "13.0" }
 
-  s.source_files = 'Code/Source'
+  s.source_files = 'Code/Source/**/*'
+
+  s.static_framework = true
+  s.dependency 'dependency', "~> version"
 end
