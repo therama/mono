@@ -35,11 +35,11 @@ jobs:
           token: ${{ github.token }}
       - name: Test
         run: |
+          podspec="THEOplayer-Connector-Jack.podspec"
           CMD="git config -l"
           if [ ${{ inputs.dryRun }} == false ]; then
             CMD="$CMD --name-only"
           else
-            podspec="THEOplayer-Connector-Jack.podspec"
             branch=$(git rev-parse --abbrev-ref HEAD)
             ls
             sed -i '' "s|:tag => \"[^\"]*\"|:branch => \"$branch\"|g" "$podspec"
@@ -47,6 +47,10 @@ jobs:
           fi
           echo "Running command: $CMD"
           $CMD
+          if [ ${{ inputs.dryRun }} == true ]; then
+            git checkout "$podspec"
+            cat "$podspec"
+          fi
       - name: Print stuff
         run: |
           echo "Log macOS version"
